@@ -1,0 +1,16 @@
+import java.util.*;
+import javax.crypto.*;
+import javax.swing.JOptionPane;
+public class Main
+{
+	public static void main(String[] args)throws Exception {
+		KeyGenerator kg=KeyGenerator.getInstance("BLOWFISH");
+		SecretKey sk=kg.generatekey();
+		Cipher c=Cipher.getInstance("BLOWFISH");
+		c.init(Cipher.ENCRYPT_MODE,sk);
+		String input=JOptionPane.showInputDialog("Input yor text:");
+		byte[] encrypt=c.doFinal(input.getbytes());
+		c.init(Cipher.DECRYPT_MODE,sk);
+		byte[] decrypt=c.doFinal(encrypt);
+		JOptionPane.showInputDialog(JOptionPane.getRootFrame(),"\nENcrypted text:"+ new String(encrypt)+"\n"+"\nDecrypt"+ new String(decrypt));
+		System.exit(0);
